@@ -1,5 +1,4 @@
-/build
-/node_modules
-.eslintrc.js
-webpack.*
-/scripts
+dist/
+example/
+*.d.ts
+*.test.ts

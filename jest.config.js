@@ -1,29 +1,19 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
-
+/** @type {import('ts-jest/dist/types').JestConfigWithTsJest} */
 module.exports = {
-
-  clearMocks: true,
-
-  coverageDirectory: "coverage",
-
-  moduleFileExtensions: [
-    "js",
-    "ts",
-  ],
-
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
   moduleNameMapper: {
     "^@App/(.*)$": "<rootDir>/src/$1",
+    "^@Pkg/(.*)$": "<rootDir>/pkg/$1",
+    "\\.(yaml)$": "<rootDir>/tests/mocks/fileMock.js",
   },
-
-  testEnvironment: "node",
-
+  moduleFileExtensions: ["js", "ts"],
   transform: {
-    '^.+\\.ts?$': 'ts-jest'
+    "\\.[jt]s$": "babel-jest",
+    "\\.m[jt]s$": "babel-jest",
   },
-
-  "jest.autoRun": {
-    "watch": true,
-    "onStartup": ["all-tests"]
-  }
+  transformIgnorePatterns: ["node_modules/(?!(uuid|dexi|yaml))"],
+  setupFiles: ["./pkg/chrome-extension-mock/index.ts"],
+  moduleDirectories: ["node_modules", "src"],
+  watch: false,
 };
